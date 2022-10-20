@@ -4,18 +4,12 @@ import TodoList from './TodoList.js'
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
-    return JSON.parse(localStorage.getItem('todos')) || []
+  return JSON.parse(localStorage.getItem('todos')) || []
   });
   const [list, setList] = useState('Todo')
   const nameRef = useRef(null);
-
-
-  // useEffect(() => {
-  //   const stored = JSON.parse(localStorage.getItem('todos'))
-  //   if (stored) {
-  //     setTodos(stored)
-  //   }
-  //   }, [])
+  const complete = todos.filter((todos) => todos.complete === false).length;
+  
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos))
@@ -44,11 +38,19 @@ export default function App() {
     setTodos = {setTodos}
     list = {list}
     />
-    <div>{`${todos.length} left to do`}</div>
-      <button onClick={() => setList("Todo")}>Todo</button>
-      <button onClick={() => setList("Completed")}>Completed</button>
+    <div>{`${complete} items left to complete!`}</div>
+      <button onClick={() => setList('Todo')}>Todo</button>
+      <button onClick={() => setList('Completed')}>Completed</button>
       <button onClick={() => setList("All")}>All</button>
-      
+      <button onClick={() => {
+          setTodos(
+            todos.filter(e =>
+              e.complete === false
+            )
+          );
+        }}>
+          Delete
+        </button>
     </>
   )
 }

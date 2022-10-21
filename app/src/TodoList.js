@@ -2,8 +2,10 @@ import React from "react";
 import Todo from "./Todo.js";
 
 export default function TodoList({ todos, setTodos, list }) {
+  
   if (list === "All") {
     return todos.map((todo) => {
+      console.log(todo.id)
       return (
         <Todo key={todo.id} todo={todo} todos={todos} setTodos={setTodos} />
       );
@@ -16,7 +18,7 @@ export default function TodoList({ todos, setTodos, list }) {
           <Todo key={todo.id} todo={todo} todos={todos} setTodos={setTodos} />
         );
       });
-  } else if (list === "Todo") {
+  } else if (list === "To-Do") {
     return todos
       .filter((todos) => todos.complete === false)
       .map((todo) => {

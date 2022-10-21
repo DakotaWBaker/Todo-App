@@ -6,6 +6,7 @@ function toggle(id) {
   const todo = newTodos.find (todo => todo.id === id)
   todo.complete = !todo.complete
   setTodos(newTodos)
+console.log(id)
 }
 
   function handleChange() {
@@ -13,14 +14,20 @@ function toggle(id) {
     };
   return (
     
-<label>
-   <div>{todo.name}
-    <input 
+
+    <div className="row items m-3">
+    <div className='col-10'>
+  {todo.name}
+   </div>
+   <div className='col-1 p-0'>
+    <input className='check'
     type = 'checkbox'
     checked = {todo.complete}
     onChange={handleChange} 
     />
-    <button onClick={() => {
+    </div>
+    <div className='col-1 p-0'>
+    <button className='todoButton' onClick={() => {
           setTodos(
             todos.filter(e =>
               e.id !== todo.id
@@ -29,7 +36,9 @@ function toggle(id) {
         }}>
           Delete
         </button>
+        </div>
     </div>
-    </label>
+  
+ 
   )
 }

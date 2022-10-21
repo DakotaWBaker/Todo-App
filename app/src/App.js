@@ -1,56 +1,51 @@
-import React from 'react'
-import { useState, useEffect, useRef} from 'react'
-import TodoList from './TodoList.js'
+import React from "react";
+import { useState, useEffect, useRef } from "react";
+import TodoList from "./TodoList.js";
+import Input from "./Input.js";
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
-  return JSON.parse(localStorage.getItem('todos')) || []
+    return JSON.parse(localStorage.getItem("todos")) || [];
   });
-  const [list, setList] = useState('Todo')
-  const nameRef = useRef(null);
-  const complete = todos.filter((todos) => todos.complete === false).length;
+  const [list, setList] = useState("To-Do");
   
 
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
-  },[todos])
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
-
-
-  function handleAdd (e) {
-    const name = nameRef.current.value;
-    
-    if (name === '') return
-    setTodos (previousTodos => {
-      return [...previousTodos, { id: Date.now(), name: name, complete: false}]
-    })
-    nameRef.current.value = null;
-  }
-  console.log(list)
   return (
-  <>
-  <h1>TODO List</h1>
-    <input ref = {nameRef} type = "text" />
-    <button onClick = {handleAdd}>Add todo</button>
-   <h2>{list}</h2>
-    <TodoList 
-    todos = {todos}
-    setTodos = {setTodos}
-    list = {list}
-    />
-    <div>{`${complete} items left to complete!`}</div>
-      <button onClick={() => setList('Todo')}>Todo</button>
-      <button onClick={() => setList('Completed')}>Completed</button>
-      <button onClick={() => setList("All")}>All</button>
-      <button onClick={() => {
-          setTodos(
-            todos.filter(e =>
-              e.complete === false
-            )
-          );
-        }}>
-          Delete
-        </button>
-    </>
-  )
+    <div
+      className="container justify-contents-center mt-5"
+      style={{ width: "40rem", height: "40rem" }}
+    >
+      
+     
+      <Input todos={todos} setTodos={setTodos} list={list} />
+      <div className="row buttons justify-content-center">
+        <div className="col-3 p-0">
+          <button className="views" onClick={() => setList("To-Do")}>To-Do</button>
+        </div>
+        <div className="col-3 views p-0 ">
+          <button className="views" onClick={() => setList("Completed")}>Completed</button>
+        </div>
+        <div className="col-3 views p-0">
+          <button className= "views" onClick={() => setList("All")}>All</button>
+        </div>
+      </div>
+   
+<div className="row buttons justify-content-center ">
+  <div className="col-4">
+      <button className= "views"
+        onClick={() => {
+          setTodos(todos.filter((e) => e.complete === false));
+        }}
+      >
+        Delete Completed
+      </button>
+      </div>
+      </div>
+    </div>
+     
+  );
 }

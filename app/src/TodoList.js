@@ -3,7 +3,7 @@ import Todo from "./Todo.js";
 
 export default function TodoList({ todos, setTodos, list }) {
   let counter = 1;    //counter thats increments each time a todo is rendered to make an ordered list with numbers
-  
+  console.log(todos)
   if (list === "All") {
       //filtering list of all todos
     return todos.map((todo) => {
@@ -14,7 +14,6 @@ export default function TodoList({ todos, setTodos, list }) {
         todo={todo}              //passing key, counter, todo, todos, settodos, and id to todo compononent
         todos={todos} 
         setTodos={setTodos} 
-        id = {Date.now()} 
         />
       );
     });
@@ -31,7 +30,6 @@ export default function TodoList({ todos, setTodos, list }) {
           todo={todo}            //passing key, counter, todo, todos, settodos, and id to todo compononent
           todos={todos} 
           setTodos={setTodos} 
-          id = {Date.now()} 
           />
         );
       });
@@ -39,7 +37,7 @@ export default function TodoList({ todos, setTodos, list }) {
   } else if (list === "To-Do") {
       //filtering all the todos that arent completed. 
     return todos
-      .filter((todos) => todos.complete === false)
+      .filter((todo) => todo.complete === false)
       .map((todo) => {
         return (
           <Todo                 
@@ -48,7 +46,6 @@ export default function TodoList({ todos, setTodos, list }) {
           todo={todo}              //passing key, counter, todo, todos, settodos, and id to todo compononent
           todos={todos} 
           setTodos={setTodos} 
-          id = {Date.now()}
           />
         );
       });

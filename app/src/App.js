@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Input from "./Input.js";
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
   //state for different views of all, completed, and todo
   const [list, setList] = useState("To-Do");
 
-//use effect for storing items to local storage. use effect running is dependent on todo state changing
+  //use effect for storing items to local storage. useeffect running is dependent on todo state changing
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -21,14 +21,14 @@ export default function App() {
       className="container justify-contents-center mt-5"
       style={{ width: "40rem", height: "40rem" }}
     >
-      <Input   //passing todos, setTodos, and list state to input component
+      <Input          //passing todos, setTodos, and list state to input component
       todos={todos} 
       setTodos={setTodos} 
       list={list} 
       />
       <div className="row buttons justify-content-center">
         <div className="col-3 p-0">
-          <button className="views"  //button for setting list view to show todo items
+          <button className="views"        //button for setting list view to show todo items
           onClick={() => setList("To-Do")}> 
             To-Do 
           </button>
@@ -47,12 +47,12 @@ export default function App() {
         </div>
       </div>
 
-      <div className="row buttons justify-content-center ">
+      <div className="row buttons mb-3 justify-content-center ">
         <div className="col-4">
           <button
             className="views" //button for deleting all completed todos
             onClick={() => {
-              setTodos(todos.filter((e) => e.complete === false));
+              setTodos(todos.filter((e) => e.complete === false));  //filtering todos that have complete as false
             }}
           >
             Delete Completed
